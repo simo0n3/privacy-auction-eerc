@@ -4,11 +4,11 @@ import * as path from "path";
 import {
   processPoseidonDecryption,
   processPoseidonEncryption,
-} from "../../src/poseidon/poseidon";
+} from "./poseidon/poseidon";
 import { Base8, mulPointEscalar, subOrder } from "@zk-kit/baby-jubjub";
 import { formatPrivKeyForBabyJub } from "maci-crypto";
-import { encryptMessage, decryptPoint } from "../../src/jub/jub";
-import { TransferCircuit } from "../../generated-types/zkit/core/TransferCircuit";
+import { encryptMessage, decryptPoint } from "./jub/jub";
+import { TransferCircuit } from "../generated-types/zkit/core/TransferCircuit";
 
 export type StandaloneDeployment = {
   contracts: {
@@ -34,15 +34,6 @@ export function getEncryptedERCAbi(): any {
     path.resolve(
       __dirname,
       "..",
-      "..",
-      "artifacts",
-      "contracts",
-      "EncryptedERC.sol",
-      "EncryptedERC.json"
-    ),
-    path.resolve(
-      process.cwd(),
-      "..",
       "artifacts",
       "contracts",
       "EncryptedERC.sol",
@@ -67,20 +58,12 @@ export function getEncryptedERCAbi(): any {
     } catch {}
   }
   throw new Error(
-    "EncryptedERC ABI not found. Set EERC_ABI_PATH or ensure artifacts are built at ../artifacts/contracts/EncryptedERC.sol/EncryptedERC.json"
+    "EncryptedERC ABI not found. Set EERC_ABI_PATH or ensure artifacts are built at artifacts/contracts/EncryptedERC.sol/EncryptedERC.json"
   );
 }
 
 export function getRegistrarAbi(): any {
   const candidates = [
-    path.resolve(
-      process.cwd(),
-      "..",
-      "artifacts",
-      "contracts",
-      "Registrar.sol",
-      "Registrar.json"
-    ),
     path.resolve(
       process.cwd(),
       "artifacts",
