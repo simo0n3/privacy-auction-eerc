@@ -361,13 +361,12 @@ async function main() {
 
       // Build inputs & proof with generated-types zkit RegistrationCircuit
       const { RegistrationCircuit } = await import(
-        "../../generated-types/zkit/core/RegistrationCircuit"
+        "../generated-types/zkit/core/RegistrationCircuit"
       );
       const circuit = new (RegistrationCircuit as any)({
         circuitName: "RegistrationCircuit",
         circuitArtifactsPath: require("path").resolve(
           process.cwd(),
-          "..",
           "zkit",
           "artifacts",
           "circom",
@@ -375,7 +374,6 @@ async function main() {
         ),
         verifierDirPath: require("path").resolve(
           process.cwd(),
-          "..",
           "zkit",
           "artifacts",
           "verifiers"
