@@ -1,0 +1,21 @@
+{
+  "network": "fuji",
+  "deployer": "0x04b486D57BacBBE2D59CdAF2391F669b339F60F8",
+  "deploymentTimestamp": "2025-08-20T15:36:57.174Z",
+  "contracts": {
+    "registrationVerifier": "0x8a8168E13732DD139fBe4D608773c6f688eA39d9",
+    "mintVerifier": "0xF83296F37F83E4576b17bc139baEe6F9cb5D6e0f",
+    "withdrawVerifier": "0x04Bc34Cdcbb2d801473E9b2738F72D201D54ab05",
+    "transferVerifier": "0xaE71a14aBf8023c6B7499ABc30632bc73Cc874D5",
+    "burnVerifier": "0xaad9e8e8E903221242Fe8C99A7dd9b8A4b927DB4",
+    "babyJubJub": "0x2d768E61c851C0197e406ce50db96D67aa4aC229",
+    "registrar": "0x7A39b9468b0a12cd6c687F42482dDB21d630bb2B",
+    "encryptedERC": "0xF3a378B584E20c855ED2bcf8ea7D309954e25FE3"
+  },
+  "metadata": {
+    "isConverter": false,
+    "decimals": 2,
+    "erc20Name": "Private Token",
+    "erc20Symbol": "PRIV"
+  }
+}

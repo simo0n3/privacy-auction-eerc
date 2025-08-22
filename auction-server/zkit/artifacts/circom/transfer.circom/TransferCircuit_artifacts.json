@@ -1,0 +1,186 @@
+{
+  "_format": "hh-zkit-artifacts-1",
+  "circuitTemplateName": "TransferCircuit",
+  "circuitFileName": "transfer",
+  "circuitSourceName": "circom/transfer.circom",
+  "baseCircuitInfo": {
+    "constraintsNumber": 26636,
+    "signals": [
+      {
+        "name": "ValueToTransfer",
+        "dimension": [],
+        "type": "Input",
+        "visibility": "Private"
+      },
+      {
+        "name": "SenderPrivateKey",
+        "dimension": [],
+        "type": "Input",
+        "visibility": "Private"
+      },
+      {
+        "name": "SenderPublicKey",
+        "dimension": [
+          2
+        ],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "SenderBalance",
+        "dimension": [],
+        "type": "Input",
+        "visibility": "Private"
+      },
+      {
+        "name": "SenderBalanceC1",
+        "dimension": [
+          2
+        ],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "SenderBalanceC2",
+        "dimension": [
+          2
+        ],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "SenderVTTC1",
+        "dimension": [
+          2
+        ],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "SenderVTTC2",
+        "dimension": [
+          2
+        ],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "ReceiverPublicKey",
+        "dimension": [
+          2
+        ],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "ReceiverVTTC1",
+        "dimension": [
+          2
+        ],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "ReceiverVTTC2",
+        "dimension": [
+          2
+        ],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "ReceiverVTTRandom",
+        "dimension": [],
+        "type": "Input",
+        "visibility": "Private"
+      },
+      {
+        "name": "ReceiverPCT",
+        "dimension": [
+          4
+        ],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "ReceiverPCTAuthKey",
+        "dimension": [
+          2
+        ],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "ReceiverPCTNonce",
+        "dimension": [],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "ReceiverPCTRandom",
+        "dimension": [],
+        "type": "Input",
+        "visibility": "Private"
+      },
+      {
+        "name": "AuditorPublicKey",
+        "dimension": [
+          2
+        ],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "AuditorPCT",
+        "dimension": [
+          4
+        ],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "AuditorPCTAuthKey",
+        "dimension": [
+          2
+        ],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "AuditorPCTNonce",
+        "dimension": [],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "AuditorPCTRandom",
+        "dimension": [],
+        "type": "Input",
+        "visibility": "Private"
+      }
+    ],
+    "parameters": {}
+  },
+  "compilerOutputFiles": {
+    "r1cs": {
+      "fileSourcePath": "D:\\hackathon\\eerc-backend-converter\\zkit\\artifacts\\circom\\transfer.circom\\TransferCircuit.r1cs",
+      "fileHash": "528a9784998e22852f760d724c847b9cd7ac96e4"
+    },
+    "wasm": {
+      "fileSourcePath": "D:\\hackathon\\eerc-backend-converter\\zkit\\artifacts\\circom\\transfer.circom\\TransferCircuit_js\\TransferCircuit.wasm",
+      "fileHash": "7194448079bf4d3b6deed53108b8c9d033698611"
+    },
+    "sym": {
+      "fileSourcePath": "D:\\hackathon\\eerc-backend-converter\\zkit\\artifacts\\circom\\transfer.circom\\TransferCircuit.sym",
+      "fileHash": "593cf54e6a4ec01ba00f00f6d67039af1729c5e7"
+    },
+    "groth16.zkey": {
+      "fileSourcePath": "D:\\hackathon\\eerc-backend-converter\\zkit\\artifacts\\circom\\transfer.circom\\TransferCircuit.groth16.zkey",
+      "fileHash": "2c1b58512399825aa43fa89fea77c67ba8b294e1"
+    },
+    "groth16.vkey": {
+      "fileSourcePath": "D:\\hackathon\\eerc-backend-converter\\zkit\\artifacts\\circom\\transfer.circom\\TransferCircuit.groth16.vkey.json",
+      "fileHash": "5cd9e94836e9cedf768dfbf0ddc4f030f0e99fe6"
+    }
+  }
+}

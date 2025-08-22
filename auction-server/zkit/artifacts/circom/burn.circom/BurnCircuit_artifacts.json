@@ -1,0 +1,128 @@
+{
+  "_format": "hh-zkit-artifacts-1",
+  "circuitTemplateName": "BurnCircuit",
+  "circuitFileName": "burn",
+  "circuitSourceName": "circom/burn.circom",
+  "baseCircuitInfo": {
+    "constraintsNumber": 16380,
+    "signals": [
+      {
+        "name": "ValueToBurn",
+        "dimension": [],
+        "type": "Input",
+        "visibility": "Private"
+      },
+      {
+        "name": "SenderPrivateKey",
+        "dimension": [],
+        "type": "Input",
+        "visibility": "Private"
+      },
+      {
+        "name": "SenderPublicKey",
+        "dimension": [
+          2
+        ],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "SenderBalance",
+        "dimension": [],
+        "type": "Input",
+        "visibility": "Private"
+      },
+      {
+        "name": "SenderBalanceC1",
+        "dimension": [
+          2
+        ],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "SenderBalanceC2",
+        "dimension": [
+          2
+        ],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "SenderVTBC1",
+        "dimension": [
+          2
+        ],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "SenderVTBC2",
+        "dimension": [
+          2
+        ],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "AuditorPublicKey",
+        "dimension": [
+          2
+        ],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "AuditorPCT",
+        "dimension": [
+          4
+        ],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "AuditorPCTAuthKey",
+        "dimension": [
+          2
+        ],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "AuditorPCTNonce",
+        "dimension": [],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "AuditorPCTRandom",
+        "dimension": [],
+        "type": "Input",
+        "visibility": "Private"
+      }
+    ],
+    "parameters": {}
+  },
+  "compilerOutputFiles": {
+    "r1cs": {
+      "fileSourcePath": "D:\\hackathon\\eerc-backend-converter\\zkit\\artifacts\\circom\\burn.circom\\BurnCircuit.r1cs",
+      "fileHash": "5c914275bbc5c5a63079eac06d24e4972a92b828"
+    },
+    "wasm": {
+      "fileSourcePath": "D:\\hackathon\\eerc-backend-converter\\zkit\\artifacts\\circom\\burn.circom\\BurnCircuit_js\\BurnCircuit.wasm",
+      "fileHash": "ea7ac68a1e6515cf1769c56541ee6ee6c08aef5a"
+    },
+    "sym": {
+      "fileSourcePath": "D:\\hackathon\\eerc-backend-converter\\zkit\\artifacts\\circom\\burn.circom\\BurnCircuit.sym",
+      "fileHash": "f450c222875e7d87559c89c5577d62c444f724fb"
+    },
+    "groth16.zkey": {
+      "fileSourcePath": "D:\\hackathon\\eerc-backend-converter\\zkit\\artifacts\\circom\\burn.circom\\BurnCircuit.groth16.zkey",
+      "fileHash": "d5b7669e75f8afa918556e418bd95b289a4d429d"
+    },
+    "groth16.vkey": {
+      "fileSourcePath": "D:\\hackathon\\eerc-backend-converter\\zkit\\artifacts\\circom\\burn.circom\\BurnCircuit.groth16.vkey.json",
+      "fileHash": "3bc2f097dfcdd1f111d841bc2ff0dbce04bcbf1c"
+    }
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "_format": "hh-zkit-artifacts-1",
+  "circuitTemplateName": "MintCircuit",
+  "circuitFileName": "mint",
+  "circuitSourceName": "circom/mint.circom",
+  "baseCircuitInfo": {
+    "constraintsNumber": 16709,
+    "signals": [
+      {
+        "name": "ValueToMint",
+        "dimension": [],
+        "type": "Input",
+        "visibility": "Private"
+      },
+      {
+        "name": "ChainID",
+        "dimension": [],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "NullifierHash",
+        "dimension": [],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "ReceiverPublicKey",
+        "dimension": [
+          2
+        ],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "ReceiverVTTC1",
+        "dimension": [
+          2
+        ],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "ReceiverVTTC2",
+        "dimension": [
+          2
+        ],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "ReceiverVTTRandom",
+        "dimension": [],
+        "type": "Input",
+        "visibility": "Private"
+      },
+      {
+        "name": "ReceiverPCT",
+        "dimension": [
+          4
+        ],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "ReceiverPCTAuthKey",
+        "dimension": [
+          2
+        ],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "ReceiverPCTNonce",
+        "dimension": [],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "ReceiverPCTRandom",
+        "dimension": [],
+        "type": "Input",
+        "visibility": "Private"
+      },
+      {
+        "name": "AuditorPublicKey",
+        "dimension": [
+          2
+        ],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "AuditorPCT",
+        "dimension": [
+          4
+        ],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "AuditorPCTAuthKey",
+        "dimension": [
+          2
+        ],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "AuditorPCTNonce",
+        "dimension": [],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "AuditorPCTRandom",
+        "dimension": [],
+        "type": "Input",
+        "visibility": "Private"
+      }
+    ],
+    "parameters": {}
+  },
+  "compilerOutputFiles": {
+    "r1cs": {
+      "fileSourcePath": "D:\\hackathon\\eerc-backend-converter\\zkit\\artifacts\\circom\\mint.circom\\MintCircuit.r1cs",
+      "fileHash": "5a86712b76ffbc92eec28bd00e175ce98f530ccd"
+    },
+    "wasm": {
+      "fileSourcePath": "D:\\hackathon\\eerc-backend-converter\\zkit\\artifacts\\circom\\mint.circom\\MintCircuit_js\\MintCircuit.wasm",
+      "fileHash": "1a420502b26735eeb19de20964e3c42adfd89e2d"
+    },
+    "sym": {
+      "fileSourcePath": "D:\\hackathon\\eerc-backend-converter\\zkit\\artifacts\\circom\\mint.circom\\MintCircuit.sym",
+      "fileHash": "7b9fa03362fe3b4f5847b4da2613f44d1d1f6337"
+    },
+    "groth16.zkey": {
+      "fileSourcePath": "D:\\hackathon\\eerc-backend-converter\\zkit\\artifacts\\circom\\mint.circom\\MintCircuit.groth16.zkey",
+      "fileHash": "cbed0892219f39bf7e11b3c943d50a2f1721d27e"
+    },
+    "groth16.vkey": {
+      "fileSourcePath": "D:\\hackathon\\eerc-backend-converter\\zkit\\artifacts\\circom\\mint.circom\\MintCircuit.groth16.vkey.json",
+      "fileHash": "7702fc5b36e5cc2f1aaedecc603a1c2c74aeb1b6"
+    }
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "_format": "hh-zkit-artifacts-1",
+  "circuitTemplateName": "WithdrawCircuit",
+  "circuitFileName": "withdraw",
+  "circuitSourceName": "circom/withdraw.circom",
+  "baseCircuitInfo": {
+    "constraintsNumber": 12276,
+    "signals": [
+      {
+        "name": "ValueToWithdraw",
+        "dimension": [],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "SenderPrivateKey",
+        "dimension": [],
+        "type": "Input",
+        "visibility": "Private"
+      },
+      {
+        "name": "SenderPublicKey",
+        "dimension": [
+          2
+        ],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "SenderBalance",
+        "dimension": [],
+        "type": "Input",
+        "visibility": "Private"
+      },
+      {
+        "name": "SenderBalanceC1",
+        "dimension": [
+          2
+        ],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "SenderBalanceC2",
+        "dimension": [
+          2
+        ],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "AuditorPublicKey",
+        "dimension": [
+          2
+        ],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "AuditorPCT",
+        "dimension": [
+          4
+        ],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "AuditorPCTAuthKey",
+        "dimension": [
+          2
+        ],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "AuditorPCTNonce",
+        "dimension": [],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "AuditorPCTRandom",
+        "dimension": [],
+        "type": "Input",
+        "visibility": "Private"
+      }
+    ],
+    "parameters": {}
+  },
+  "compilerOutputFiles": {
+    "r1cs": {
+      "fileSourcePath": "D:\\hackathon\\eerc-backend-converter\\zkit\\artifacts\\circom\\withdraw.circom\\WithdrawCircuit.r1cs",
+      "fileHash": "fe39732a07b8af575e1b72856997a69f8d43177f"
+    },
+    "wasm": {
+      "fileSourcePath": "D:\\hackathon\\eerc-backend-converter\\zkit\\artifacts\\circom\\withdraw.circom\\WithdrawCircuit_js\\WithdrawCircuit.wasm",
+      "fileHash": "a94647c2c0bc5e68e14d365d593998282fbf41da"
+    },
+    "sym": {
+      "fileSourcePath": "D:\\hackathon\\eerc-backend-converter\\zkit\\artifacts\\circom\\withdraw.circom\\WithdrawCircuit.sym",
+      "fileHash": "f77972c4bde63f1779f6e0bc2a40554dec5532fa"
+    },
+    "groth16.zkey": {
+      "fileSourcePath": "D:\\hackathon\\eerc-backend-converter\\zkit\\artifacts\\circom\\withdraw.circom\\WithdrawCircuit.groth16.zkey",
+      "fileHash": "e54b662eebbeab8dc00cafd695fa19b5704e3a8d"
+    },
+    "groth16.vkey": {
+      "fileSourcePath": "D:\\hackathon\\eerc-backend-converter\\zkit\\artifacts\\circom\\withdraw.circom\\WithdrawCircuit.groth16.vkey.json",
+      "fileHash": "f0642a1b1b03773a4d90ee6c95dd5ced1afed389"
+    }
+  }
+}
