@@ -1,5 +1,8 @@
 {
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "https://YOUR-BACKEND-URL/$1" }
+    {
+      "source": "/api/(.*)",
+      "destination": "https://privacy-auction-eerc-production.up.railway.app/$1"
+    }
   ]
 }
