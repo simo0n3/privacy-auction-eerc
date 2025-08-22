@@ -1,68 +1,135 @@
-# Veil Auction — 基于 eERC 的隐私拍卖系统
+# Veil Auction — Private Auction on eERC
 
-Veil Auction 将 EncryptedERC(eERC) 私密资产与最少信任的“托管竞拍”结合：
+Veil Auction combines EncryptedERC (eERC) private tokens with a minimally trusted escrow auction flow:
 
-- 竞拍人对托管地址进行私密转账（金额仅持有密钥方可解密）。
-- 服务端仅解密竞价金额用于排序与结算，不泄露其他信息。
-- 前端提供“一键私密出价”、绑定竞价、结算与退款等完整流程。
+- Bidders privately transfer to the escrow address (amounts are hidden on-chain; only a holder of the decryption key can read them).
+- The server decrypts just the bid amounts for sorting and settlement, without exposing additional data.
+- The frontend offers a one-click flow to place a private bid, bind it to an auction, settle the winner, and refund others.
 
-本工程包含：
+This repository includes:
 
-- 合约与 Hardhat 工程（根目录）
-- 前端 `auction-frontend/`（Vite + React）
-- 服务端 `auction-server/`（Express + Ethers）
+- Smart contracts + Hardhat project (root)
+- Frontend `auction-frontend/` (Vite + React)
+- Server `auction-server/` (Express + Ethers)
+
+[Project Roadmap](./ROADMAP.md)
 
 ---
 
-## 环境要求
+## Hack2Build — Program Context
+
+A 4-week, staged builder program to go from idea to product using encrypted token standards (e.g., eERC20). Each stage has mentorship, workshops, and prizes, with potential entry to the Codebase Accelerator.
+
+### Kickoff Weekend (Aug 15–17)
+
+Workshops to form teams, shape ideas, and understand eERC20.
+
+### Week 1: Round 1 — Build a Prototype (Aug 18–23)
+
+- Deliverables: MVP on GitHub + short growth/product roadmap with milestones
+- Support: Telegram chat
+- Submission Deadline: August 23
+- Winners Announcement: August 25 (non-awarded teams continue building)
+- Prizes: $5,000
+
+### Weeks 2–3: Round 2 — Product & Growth Development (Aug 25 – Sep 07)
+
+- Deliverables: Roadmap progress, GTM strategy, pitch deck
+- Support: 1:1 mentorship (technical, product, business), DevRel workshops & chat
+- Submission Deadline: September 07
+- Judging + Pitch Sessions: September 1st
+- Announcement: September 07
+- Prizes: $5,000
+
+### Week 4: Round 3 — Testnet & Codebase Fastrack Pitch (Sep 08–14)
+
+- Deliverables: Code progress tied to roadmap, deployed product on testnet, final pitch
+- Support: Advanced mentorship, marketing spotlight, custom support
+- Submission Deadline: September 17
+- Final Pitch & Judging: September 17
+- Top 3 Winners Announced: September 17
+
+### Post-Program
+
+- Spotlight and social recognition
+- Milestone-based grants
+- Participation certificates & program recap
+
+### Tracks (Total Prize Pool: $25,000)
+
+- Private DeFi: Private swaps, lending, staking, DAOs using encrypted eERC20
+- Privacy Tools & Infra: SDKs, extensions, proof systems, wallet features
+- Privacy-First L1s: Encrypted bridges, cross-chain coordination, gas abstractions
+- Real Private Use Cases: Privacy for real-world business needs
+
+### Resources & Submission
+
+- Agenda: calendar entries with meet links and reminders
+- eERC20 Tooling & Docs, Builder hub, Developer Tools (Avalanche)
+- Submission: GitHub repo + slides + supporting files via Avalanche Builder Hub
+- Evaluation: value proposition, technical complexity, usage of Avalanche tech
+
+Schedule window: August 15, 2025 – September 12, 2025 (see agenda for live sessions & deadlines).
+
+---
+
+## Why eERC for Auctions
+
+- Bid amounts are encrypted-on-chain; observers cannot infer values.
+- Only the escrow (auditor key) can decrypt amounts to compute the winner and refunds.
+- Auction state stays minimal on-chain; off-chain server performs safe decryption and orchestration.
+
+---
+
+## Prerequisites
 
 - Node.js 18+
 - npm 9+
-- 可选：Avalanche Fuji 测试网账户与 AVAX 测试币（用于合约交互）
+- Optional: Avalanche Fuji testnet account and AVAX for gas
 
-## 环境变量
+## Environment Variables
 
-在项目根目录创建 `.env`（用于 Hardhat/合约编译与网络账号）：
+Create a `.env` at the project root (used by Hardhat/contracts):
 
 ```
 # Avalanche Fuji Testnet RPC
 RPC_URL=https://api.avax-test.network/ext/bc/C/rpc
 
-# 至少提供一个私钥用于部署/交互（0x 前缀可选）
-PRIVATE_KEY=你的私钥1
-PRIVATE_KEY_2=你的私钥2
+# At least one deploy/interaction private key (0x prefix optional)
+PRIVATE_KEY=your_private_key_1
+PRIVATE_KEY_2=your_private_key_2
 
-# 打开 Hardhat 本地链分叉（可选）
+# Hardhat forking (optional)
 FORKING=false
 ```
 
-在 `auction-server/.env` 创建服务端配置：
+Create `auction-server/.env` for the server:
 
 ```
-# 服务端监听端口
+# Server port
 PORT=4001
-# 供前端通过 vite 代理访问为 http://localhost:5173/api → http://localhost:4001
+# Frontend will reach the server via Vite proxy: http://localhost:5173/api → http://localhost:4001
 
-# RPC 与托管账户（不填则继承根 .env 中的 RPC_URL 与 PRIVATE_KEY）
+# RPC & escrow account (falls back to root .env if omitted)
 RPC_URL=https://api.avax-test.network/ext/bc/C/rpc
-ESCROW_EVM_PRIVATE_KEY=用于充当托管账户的私钥
+ESCROW_EVM_PRIVATE_KEY=private_key_used_as_escrow
 
-# 指向独立部署(Standalone)地址文件（默认已指向 ../deployments/standalone/latest-standalone.json）
+# Standalone deployment file path
 STANDALONE_DEPLOYMENT=../deployments/standalone/latest-standalone.json
 ```
 
 ---
 
-## 安装与编译
+## Install & Build
 
-根目录执行：
+In the root directory:
 
 ```
 npm install
-# 首次安装会自动 hardhat compile + zkit circuits + 生成 verifiers
+# Postinstall triggers: hardhat compile + zkit circuits + verifiers generation
 ```
 
-前端与服务端依赖：
+Install frontend and server dependencies:
 
 ```
 cd auction-frontend && npm install
@@ -71,114 +138,114 @@ cd ../auction-server && npm install
 
 ---
 
-## 部署合约（Standalone 模式）
+## Deploy Contracts (Standalone Mode)
 
-本拍卖使用 eERC 的 Standalone 模式（原生隐私代币 PRIV，2 位小数）。按顺序执行：
+Veil Auction uses eERC Standalone mode with a native privacy token `PRIV` (2 decimals). Execute in order:
 
 ```
-# 1) 部署基础合约（verifier、库等）
+# 1) Base components (verifiers, libs)
 npx hardhat run scripts/standalone/01_deploy-basics.ts --network fuji
 
-# 2) 部署 Standalone eERC 与 Registrar
+# 2) Standalone eERC + Registrar
 npx hardhat run scripts/standalone/02_deploy-standalone.ts --network fuji
 
-# 3) 注册用户（买家、卖家等）。脚本内 WALLET_NUMBER=1/2 可切换签名账户
+# 3) Register users (buyers/sellers). Switch WALLET_NUMBER=1/2 inside script
 npx hardhat run scripts/standalone/03_register-user.ts --network fuji
 
-# 4) 设置审计公钥（Auditor），用于服务端解密金额
+# 4) Set auditor public key (server decrypts amounts)
 npx hardhat run scripts/standalone/04_set-auditor.ts --network fuji
 
-# 5) 铸造初始 PRIV 余额（仅合约 Owner 可执行）
+# 5) Mint initial PRIV balances (owner only)
 npx hardhat run scripts/standalone/05_mint.ts --network fuji
 ```
 
-部署信息会写入 `deployments/standalone/latest-standalone.json`，服务端会读取该文件。
+Deployment info is written to `deployments/standalone/latest-standalone.json`, which the server reads.
 
 ---
 
-## 启动服务端与前端
+## Run Server & Frontend
 
-确保 `.env` 与 `auction-server/.env` 已正确填写。
+Ensure `.env` and `auction-server/.env` are configured.
 
-启动服务端：
+Start server:
 
 ```
 cd auction-server
 npm run dev
-# 监听 :4001，提供 REST API 与链上日志轮询/解密
+# Listens on :4001 and polls on-chain logs, decrypts bids, and exposes REST APIs
 ```
 
-启动前端：
+Start frontend:
 
 ```
 cd auction-frontend
 npm run dev
-# 打开 http://localhost:5173
-# Vite 代理将 /api 转发到 http://localhost:4001
+# Visit http://localhost:5173
+# Vite proxies /api to http://localhost:4001
 ```
 
 ---
 
-## 使用流程（从 0 到一个完整拍卖）
+## End-to-End Usage
 
-### 1) 创建拍卖
+### 1) Create an Auction
 
-- 前端首页 `Auction List` → 输入名称 → Start Auction
-- 服务端返回 `auctionId`，前端可进入 `/auction/:id`
+- On the home page (Auction List), enter a name and click "Start Auction".
+- The server returns `auctionId`; the UI navigates to `/auction/:id`.
 
-### 2) 钱包注册（一次性）
+### 2) Register Wallet (one-time)
 
-- 前端顶部/隐藏工具提供“Register Wallet”按钮，或在详情页签名并注册。
-- 背后会向服务端请求 `register-prepare` 生成证明，再由前端交易调用 Registrar 的 `register`。
+- Use "Register Wallet" in the header or the hidden tools panel.
+- The server provides registration calldata via `/register-prepare`; the frontend submits it to the Registrar.
 
-### 3) 读取余额
+### 3) Read Balance
 
-- 前端通过“Read Balance (Hidden)”或详情页调用 `/api/balance`，服务端用签名派生密钥解密 PCT 聚合得到可用余额（单位 PRIV）。
+- Via hidden tools or `/api/balance`: the server derives BabyJub private key from your signature and decrypts PCTs to compute spendable `PRIV`.
 
-### 4) 一键私密出价
+### 4) One-Click Private Bid
 
-- 进入 `Auction Detail`，输入金额（小数 2 位），点击 “One-Click Private Bid”。
-- 前端：
-  - 用签名派生 BabyJub 私钥；
-  - 调用 `/api/auctions/:id/prepare-bid` 由服务端生成 Transfer 证明与 `senderBalancePCT`；
-  - 由前端钱包向 `EncryptedERC.transfer(escrow, tokenId=0, calldata, senderBalancePCT)` 发交易；
-  - 轮询调用 `/api/auctions/:id/bind` 绑定该交易为本拍卖的一次出价。
-- 服务端：
-  - 轮询链上 `PrivateTransfer` 日志，使用审计私钥解密金额，仅记录 amount 与 from/to/txHash 等最小信息。
+- On Auction Detail, enter the amount (2 decimals) and click "One-Click Private Bid".
+- Frontend:
+  - Derives BabyJub SK from signature
+  - Calls `/api/auctions/:id/prepare-bid` to let the server prepare Transfer proof and `senderBalancePCT`
+  - Sends `EncryptedERC.transfer(escrow, tokenId=0, calldata, senderBalancePCT)` with your wallet
+  - Polls `/api/auctions/:id/bind` to bind the transaction as a bid
+- Server:
+  - Polls `PrivateTransfer` logs and decrypts amounts using the auditor key; stores minimal bid info
 
-### 5) 查看出价列表
+### 5) View Bids
 
-- 详情页点击 “Refresh Bids”，可见按金额降序（同额按区块高与日志序）排列的出价数组。
+- Click "Refresh Bids" to view bids sorted by amount desc (then by block/idx).
 
-### 6) 结算与退款（卖家侧）
+### 6) Settlement & Refunds (seller)
 
-- 在详情页 Admin 面板：
-  - 设定 `Seller` 地址（默认为托管地址）。
-  - “Get Payout Plan” 查看赢家与退款列表。
-  - “Settle” 执行托管→卖家转账（赢家金额）。
-  - “Refund Losers” 对其余出价人逐一退款。
-- 若涉及 NFT，可在 Admin 面板配置 ERC721 地址和 TokenId，点击 “Send to Winner” 将 NFT 转给赢家。
+- In Admin panel on the detail page:
+  - Set `Seller` address (defaults to escrow)
+  - "Get Payout Plan" to preview winner and refunds
+  - "Settle": escrow → seller (winner amount)
+  - "Refund Losers": escrow → other bidders
+- If an NFT is involved, input ERC721 address & tokenId and click "Send to Winner" to transfer the NFT to the winner.
 
 ---
 
-## 主要 REST API（服务端）
+## REST API (Server)
 
-- `GET /health`：健康检查
-- `GET /config`：链与合约地址、托管地址、decimals
-- `GET /abi/encrypted-erc` / `GET /abi/registrar`：ABI
-- `POST /register-prepare`：输入 `{ address, signature }`，返回注册 `calldata`
-- `POST /balance`：输入 `{ address, signature }`，返回 `{ spendableRaw, spendable, txIndex }`
-- `POST /faucet`：输入 `{ to, amount }`，从托管向指定地址私密转账（需对方已注册）
-- `POST /auctions`：创建拍卖，返回 `{ id }`
-- `GET /auctions`：拍卖列表
-- `GET /auctions/:id/bids`：获取该拍卖已绑定的出价
-- `POST /auctions/:id/bind`：绑定某次出价到拍卖，入参 `{ txHash, sender, bindingHash }`
-- `GET /auctions/:id/payout-plan`：计算赢家与退款计划
-- `POST /auctions/:id/settle`：一键结算（托管→卖家）
-- `POST /auctions/:id/refund`：一键退款（托管→落败者）
-- `POST /auctions/:id/seller`：设置卖家地址
+- `GET /health`: health check
+- `GET /config`: chain & contract addresses, escrow, decimals
+- `GET /abi/encrypted-erc` / `GET /abi/registrar`: ABIs
+- `POST /register-prepare`: `{ address, signature }` → registration calldata
+- `POST /balance`: `{ address, signature }` → `{ spendableRaw, spendable, txIndex }`
+- `POST /faucet`: `{ to, amount }` → escrow → user private transfer (receiver must be registered)
+- `POST /auctions`: create auction, returns `{ id }`
+- `GET /auctions`: list auctions
+- `GET /auctions/:id/bids`: bids for an auction (decrypted amounts)
+- `POST /auctions/:id/bind`: bind a bid `{ txHash, sender, bindingHash }`
+- `GET /auctions/:id/payout-plan`: compute winner + refunds
+- `POST /auctions/:id/settle`: escrow → seller (winner amount)
+- `POST /auctions/:id/refund`: escrow → losers
+- `POST /auctions/:id/seller`: set seller
 
-绑定哈希 `bindingHash` 计算：
+Binding hash computation:
 
 ```ts
 ethers.solidityPackedKeccak256(
@@ -189,25 +256,25 @@ ethers.solidityPackedKeccak256(
 
 ---
 
-## 常见问题
+## Troubleshooting
 
-- 无法找到 ABI：先在根目录执行 `npm install` 以触发编译与 zkit 产物生成，或设置 `EERC_ABI_PATH` 环境变量。
-- 余额解密为 0：确保账号已注册、签名消息格式为 `eERC\nRegistering user with\n Address:${address.toLowerCase()}`，且确实收到过转账或铸造。
-- 绑定失败：等待交易上链后再重试，前端已实现最多 20 次轮询重试（1.5s 间隔）。
-- 托管余额不足：在服务端 `faucet` 或通过 Owner 铸造（Standalone）给托管地址补充 PRIV。
-- 本地开发端口：前端 5173，服务端 4001，Vite 已将 `/api` 代理到服务端。
-
----
-
-## 目录结构（摘）
-
-- `contracts/`：eERC、Registrar、verifiers 等合约
-- `scripts/standalone/`：Standalone 部署与操作脚本
-- `auction-server/`：后端服务（竞价捕获、解密、结算、退款）
-- `auction-frontend/`：前端（React + Vite）
+- ABI not found: run `npm install` in root to compile and generate zkit artifacts; or set `EERC_ABI_PATH`.
+- Spendable balance is 0: ensure the wallet is registered, signature format is exactly `eERC\nRegistering user with\n Address:${address.toLowerCase()}`, and funds were received/minted.
+- Bind failed: wait until the tx is mined and retry; the frontend auto-retries up to ~20 times (1.5s interval).
+- Escrow balance insufficient: top up escrow via server `/faucet` (receiver must be registered) or owner mint in Standalone.
+- Local dev: frontend 5173, server 4001; Vite proxies `/api` to the server.
 
 ---
 
-## 许可
+## Repository Structure (excerpt)
 
-本仓库基于隐私代币与电路实现，仅供研究与黑客松演示使用，生产环境请进行全面审计与风险评估。
+- `contracts/`: eERC, Registrar, verifiers
+- `scripts/standalone/`: Standalone deployment & ops scripts
+- `auction-server/`: server (bid capture, decryption, settlement, refund)
+- `auction-frontend/`: frontend (React + Vite)
+
+---
+
+## License & Disclaimer
+
+This project demonstrates private tokens and ZK circuits for hackathon and research purposes. Do not use in production without thorough audits and risk assessments.
