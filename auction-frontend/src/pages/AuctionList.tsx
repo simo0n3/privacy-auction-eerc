@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BrowserProvider } from "ethers";
-import { createAuction, listAuctions } from "../services/api";
+import { createAuction, listAuctions, API_BASE } from "../services/api";
 import { NFTCard } from "../components/NFTCard";
 
 type Props = {
@@ -55,19 +55,21 @@ export function AuctionList({ provider }: Props) {
                   const signer = await provider.getSigner();
                   const message = `eERC\nRegistering user with\n Address:${account.toLowerCase()}`;
                   const signature = await signer.signMessage(message);
-                  const prep = await fetch(`/api/register-prepare`, {
+                  const prep = await fetch(`${API_BASE}/register-prepare`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ address: account, signature }),
                   }).then((r) => r.json());
                   if (prep?.already) return alert("Already registered");
                   if (prep?.error) return alert(prep.error);
-                  const abi = await fetch(`/api/abi/registrar`).then((r) =>
-                    r.json()
+                  const abi = await fetch(`${API_BASE}/abi/registrar`).then(
+                    (r) => r.json()
                   );
                   const { Contract } = await import("ethers");
                   const c = new Contract(
-                    (await (await fetch(`/api/config`)).json()).registrar,
+                    (
+                      await (await fetch(`${API_BASE}/config`)).json()
+                    ).registrar,
                     abi,
                     signer
                   );
@@ -92,7 +94,7 @@ export function AuctionList({ provider }: Props) {
                   const signer = await provider.getSigner();
                   const message = `eERC\nRegistering user with\n Address:${account.toLowerCase()}`;
                   const signature = await signer.signMessage(message);
-                  const r = await fetch(`/api/balance`, {
+                  const r = await fetch(`${API_BASE}/balance`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ address: account, signature }),

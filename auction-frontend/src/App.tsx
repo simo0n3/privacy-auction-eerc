@@ -4,6 +4,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import { AuctionList } from "./pages/AuctionList";
 import { AuctionDetail } from "./pages/AuctionDetail";
 import { computeBindingHash } from "./lib/eerc";
+import { API_BASE } from "./services/api";
 
 type Config = {
   chainId: number;
@@ -38,7 +39,7 @@ function App() {
   const [regLoading, setRegLoading] = useState(false);
 
   useEffect(() => {
-    fetch("/api/config")
+    fetch(`${API_BASE}/config`)
       .then((r) => r.json())
       .then(setCfg);
   }, []);
@@ -65,7 +66,7 @@ function App() {
       const signer = await provider.getSigner();
       const message = `eERC\nRegistering user with\n Address:${account.toLowerCase()}`;
       const signature = await signer.signMessage(message);
-      const prep = await fetch(`/api/register-prepare`, {
+      const prep = await fetch(`${API_BASE}/register-prepare`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ address: account, signature }),
@@ -75,7 +76,9 @@ function App() {
         setIsRegistered(true);
         return alert("Already registered");
       }
-      const abi = await fetch(`/api/abi/registrar`).then((r) => r.json());
+      const abi = await fetch(`${API_BASE}/abi/registrar`).then((r) =>
+        r.json()
+      );
       const c = new Contract(cfg!.registrar, abi, signer);
       const tx = await (c as any).register(prep.calldata);
       const receipt = await tx.wait();
@@ -89,7 +92,7 @@ function App() {
   }
 
   async function createAuction() {
-    const r = await fetch("/api/auctions", {
+    const r = await fetch(`${API_BASE}/auctions`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name: "Test" }),
@@ -103,7 +106,7 @@ function App() {
     const signer = await provider.getSigner();
     const message = `eERC\nRegistering user with\n Address:${account.toLowerCase()}`;
     const signature = await signer.signMessage(message);
-    const r = await fetch(`/api/balance`, {
+    const r = await fetch(`${API_BASE}/balance`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ address: account, signature }),
@@ -138,7 +141,7 @@ function App() {
 
   async function bindBid() {
     if (!auctionId || !txHash || !bindingHash || !account) return;
-    const r = await fetch(`/api/auctions/${auctionId}/bind`, {
+    const r = await fetch(`${API_BASE}/auctions/${auctionId}/bind`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ txHash, sender: account, bindingHash }),
@@ -150,14 +153,14 @@ function App() {
 
   async function refreshBids() {
     if (!auctionId) return;
-    const r = await fetch(`/api/auctions/${auctionId}/bids`);
+    const r = await fetch(`${API_BASE}/auctions/${auctionId}/bids`);
     const j = await r.json();
     setBids(j.bids || []);
   }
 
   async function setSellerAddr() {
     if (!auctionId || !seller) return;
-    const r = await fetch(`/api/auctions/${auctionId}/seller`, {
+    const r = await fetch(`${API_BASE}/auctions/${auctionId}/seller`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ seller }),
@@ -169,7 +172,7 @@ function App() {
 
   async function closeAuction() {
     if (!auctionId) return;
-    const r = await fetch(`/api/auctions/${auctionId}/close`, {
+    const r = await fetch(`${API_BASE}/auctions/${auctionId}/close`, {
       method: "POST",
     });
     const j = await r.json();
@@ -179,7 +182,7 @@ function App() {
 
   async function getPayoutPlan() {
     if (!auctionId) return;
-    const r = await fetch(`/api/auctions/${auctionId}/payout-plan`);
+    const r = await fetch(`${API_BASE}/auctions/${auctionId}/payout-plan`);
     const j = await r.json();
     if (j.error) return alert(j.error);
     setPayout(j);
@@ -195,18 +198,23 @@ function App() {
         `eERC\nRegistering user with\n Address:${account.toLowerCase()}`
       );
       const amountRaw = BigInt(Math.round(parseFloat(amount) * 100));
-      const prep = await fetch(`/api/auctions/${auctionId}/prepare-bid`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          sender: account,
-          signature,
-          amount: amountRaw.toString(),
-        }),
-      }).then((r) => r.json());
+      const prep = await fetch(
+        `${API_BASE}/auctions/${auctionId}/prepare-bid`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            sender: account,
+            signature,
+            amount: amountRaw.toString(),
+          }),
+        }
+      ).then((r) => r.json());
       if (prep.error) return alert(prep.error);
       const { calldata, senderBalancePCT } = prep;
-      const abi = await fetch(`/api/abi/encrypted-erc`).then((r) => r.json());
+      const abi = await fetch(`${API_BASE}/abi/encrypted-erc`).then((r) =>
+        r.json()
+      );
       const c = new Contract(cfg.encryptedERC, abi, await provider.getSigner());
       const tx = await c.transfer(cfg.escrow, 0, calldata, senderBalancePCT);
       await tx.wait();
@@ -222,7 +230,7 @@ function App() {
       let ok = false;
       let lastErr = "";
       for (let i = 0; i < 20 && !ok; i++) {
-        const bindRes = await fetch(`/api/auctions/${auctionId}/bind`, {
+        const bindRes = await fetch(`${API_BASE}/auctions/${auctionId}/bind`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -257,7 +265,7 @@ function App() {
     try {
       if (!auctionId) return;
       setSettleLoading(true);
-      const r = await fetch(`/api/auctions/${auctionId}/settle`, {
+      const r = await fetch(`${API_BASE}/auctions/${auctionId}/settle`, {
         method: "POST",
       });
       const j = await r.json();
@@ -274,7 +282,7 @@ function App() {
     try {
       if (!auctionId) return;
       setRefundLoading(true);
-      const r = await fetch(`/api/auctions/${auctionId}/refund`, {
+      const r = await fetch(`${API_BASE}/auctions/${auctionId}/refund`, {
         method: "POST",
       });
       const j = await r.json();
@@ -290,7 +298,7 @@ function App() {
   async function faucet() {
     try {
       setFaucetLoading(true);
-      const r = await fetch(`/api/faucet`, {
+      const r = await fetch(`${API_BASE}/faucet`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ to: faucetTo, amount: faucetAmount }),

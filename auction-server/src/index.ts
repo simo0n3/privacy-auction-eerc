@@ -27,6 +27,9 @@ const ESCROW_EVM_PRIVATE_KEY =
 const DEPLOY_FILE =
   process.env.STANDALONE_DEPLOYMENT ||
   "../deployments/standalone/latest-standalone.json";
+const ZKIT_ARTIFACTS_DIR =
+  process.env.ZKIT_ARTIFACTS_DIR ||
+  path.resolve(process.cwd(), "..", "zkit", "artifacts");
 const PORT = Number(process.env.PORT || 4001);
 
 if (!ESCROW_EVM_PRIVATE_KEY) {
@@ -459,13 +462,10 @@ async function main() {
         recvPub,
         auditorPub
       );
-      const artifactsDir = require("path").resolve(
-        process.cwd(),
-        "..",
-        "zkit",
-        "artifacts"
+      const calldata = await generateTransferCalldata(
+        ZKIT_ARTIFACTS_DIR,
+        input
       );
-      const calldata = await generateTransferCalldata(artifactsDir, input);
       const tx = await (encryptedERC as any).transfer(
         to,
         tokenId,
@@ -710,14 +710,11 @@ async function main() {
         escrowPub,
         auditorPub
       );
-      const artifactsDir = require("path").resolve(
-        process.cwd(),
-        "..",
-        "zkit",
-        "artifacts"
+      console.log("[PrepareBid] artifactsDir", ZKIT_ARTIFACTS_DIR);
+      const calldata = await generateTransferCalldata(
+        ZKIT_ARTIFACTS_DIR,
+        input
       );
-      console.log("[PrepareBid] artifactsDir", artifactsDir);
-      const calldata = await generateTransferCalldata(artifactsDir, input);
       console.log(
         "[PrepareBid] calldata ok, publicSignals len:",
         (calldata?.publicSignals as any)?.length
@@ -899,14 +896,11 @@ async function main() {
         sellerPub,
         auditorPub
       );
-      const artifactsDir = require("path").resolve(
-        process.cwd(),
-        "..",
-        "zkit",
-        "artifacts"
+      console.log("[Settle] artifactsDir", ZKIT_ARTIFACTS_DIR);
+      const calldata = await generateTransferCalldata(
+        ZKIT_ARTIFACTS_DIR,
+        input
       );
-      console.log("[Settle] artifactsDir", artifactsDir);
-      const calldata = await generateTransferCalldata(artifactsDir, input);
 
       const tx = await (encryptedERC as any).transfer(
         seller,
@@ -1002,14 +996,11 @@ async function main() {
           loserPub,
           auditorPub
         );
-        const artifactsDir = require("path").resolve(
-          process.cwd(),
-          "..",
-          "zkit",
-          "artifacts"
+        console.log("[Refund] artifactsDir", ZKIT_ARTIFACTS_DIR);
+        const calldata = await generateTransferCalldata(
+          ZKIT_ARTIFACTS_DIR,
+          input
         );
-        console.log("[Refund] artifactsDir", artifactsDir);
-        const calldata = await generateTransferCalldata(artifactsDir, input);
         const tx = await (encryptedERC as any).transfer(
           loser.from,
           tokenId,
