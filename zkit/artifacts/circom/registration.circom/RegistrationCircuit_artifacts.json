@@ -1,0 +1,66 @@
+{
+  "_format": "hh-zkit-artifacts-1",
+  "circuitTemplateName": "RegistrationCircuit",
+  "circuitFileName": "registration",
+  "circuitSourceName": "circom/registration.circom",
+  "baseCircuitInfo": {
+    "constraintsNumber": 1797,
+    "signals": [
+      {
+        "name": "SenderPrivateKey",
+        "dimension": [],
+        "type": "Input",
+        "visibility": "Private"
+      },
+      {
+        "name": "SenderPublicKey",
+        "dimension": [
+          2
+        ],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "SenderAddress",
+        "dimension": [],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "ChainID",
+        "dimension": [],
+        "type": "Input",
+        "visibility": "Public"
+      },
+      {
+        "name": "RegistrationHash",
+        "dimension": [],
+        "type": "Input",
+        "visibility": "Public"
+      }
+    ],
+    "parameters": {}
+  },
+  "compilerOutputFiles": {
+    "r1cs": {
+      "fileSourcePath": "D:\\hackathon\\eerc-backend-converter\\zkit\\artifacts\\circom\\registration.circom\\RegistrationCircuit.r1cs",
+      "fileHash": "28ecae0fa1e207f5594401a07cff3b4830b6a49f"
+    },
+    "wasm": {
+      "fileSourcePath": "D:\\hackathon\\eerc-backend-converter\\zkit\\artifacts\\circom\\registration.circom\\RegistrationCircuit_js\\RegistrationCircuit.wasm",
+      "fileHash": "64f39c0fb7f4b187490af0499ac05d8d3c125677"
+    },
+    "sym": {
+      "fileSourcePath": "D:\\hackathon\\eerc-backend-converter\\zkit\\artifacts\\circom\\registration.circom\\RegistrationCircuit.sym",
+      "fileHash": "815ea4dbf729fe65a59dd490cc80d48f70cdd589"
+    },
+    "groth16.zkey": {
+      "fileSourcePath": "D:\\hackathon\\eerc-backend-converter\\zkit\\artifacts\\circom\\registration.circom\\RegistrationCircuit.groth16.zkey",
+      "fileHash": "4371f8e4fab3365aca722c505554d2dbe351a735"
+    },
+    "groth16.vkey": {
+      "fileSourcePath": "D:\\hackathon\\eerc-backend-converter\\zkit\\artifacts\\circom\\registration.circom\\RegistrationCircuit.groth16.vkey.json",
+      "fileHash": "828f89d0f29bf3da1be955c1399abc4dbfe7c887"
+    }
+  }
+}
