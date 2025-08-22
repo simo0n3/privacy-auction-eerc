@@ -8,7 +8,7 @@ import { getWallet, deriveKeysFromUser } from "../../src/utils";
 const main = async () => {
     // Configure which wallet to use: 1 for first signer, 2 for second signer
     // Can be overridden with environment variable: WALLET_NUMBER=1 or WALLET_NUMBER=2
-    const WALLET_NUMBER = 1;
+    const WALLET_NUMBER = 2;
     
     const wallet = await getWallet(WALLET_NUMBER);
     const userAddress = await wallet.getAddress();
@@ -29,7 +29,7 @@ const main = async () => {
     // 1. Check if already registered
     const isRegistered = await registrar.isUserRegistered(userAddress);
     if (isRegistered) {
-        console.log("âœ… User is already registered");
+        console.log("âœ?User is already registered");
         return;
     }
     
@@ -75,11 +75,11 @@ const main = async () => {
         
         // Generate proof
         const proof = await registrationCircuit.generateProof(input);
-        console.log("âœ… Proof generated successfully using zkit");
+        console.log("âœ?Proof generated successfully using zkit");
         
         // Generate calldata for the contract
         const calldata = await registrationCircuit.generateCalldata(proof);
-        console.log("âœ… Calldata generated successfully");
+        console.log("âœ?Calldata generated successfully");
         
         // 5. Call the contract
         console.log("ğŸ“ Registering in the contract...");
@@ -87,9 +87,9 @@ const main = async () => {
             const registerTx = await registrar.register(calldata);
             await registerTx.wait();
             
-            console.log("âœ… User registered successfully!");
+            console.log("âœ?User registered successfully!");
         } catch (contractError) {
-            console.error("âŒ Contract error: ", contractError);
+            console.error("â?Contract error: ", contractError);
             
             // Extract contract error message
             if (contractError instanceof Error) {
@@ -152,7 +152,7 @@ const main = async () => {
         console.log("ğŸ”‘ User keys saved to:", keysPath);
         
     } catch (error) {
-        console.error("âŒ Error during registration:");
+        console.error("â?Error during registration:");
         
         // Show detailed error information
         if (error instanceof Error) {

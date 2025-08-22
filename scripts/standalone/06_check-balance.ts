@@ -7,7 +7,7 @@ import { getWallet, deriveKeysFromUser, decryptEGCTBalance } from "../../src/uti
 const main = async () => {
     // Configure which wallet to use: 1 for first signer, 2 for second signer
     // Can be overridden with environment variable: WALLET_NUMBER=1 or WALLET_NUMBER=2
-    const WALLET_NUMBER = 2;
+    const WALLET_NUMBER = 1;
     
     const wallet = await getWallet(WALLET_NUMBER);
     const userAddress = await wallet.getAddress();
@@ -31,11 +31,11 @@ const main = async () => {
         // Check if user is registered
         const isUserRegistered = await registrar.isUserRegistered(userAddress);
         if (!isUserRegistered) {
-            console.error("‚ùå User is not registered. Please run the registration script first.");
+            console.error("‚ù?User is not registered. Please run the registration script first.");
             console.log("üí° Run: npx hardhat run scripts/standalone/03_register-user.ts --network fuji");
             return;
         }
-        console.log("‚úÖ User is registered");
+        console.log("‚ú?User is registered");
         
         // Derive keys from user signature (same as other scripts)
         console.log("üîë Deriving keys from user signature...");
@@ -46,11 +46,11 @@ const main = async () => {
         const publicKeysMatch = publicKey[0] === BigInt(userPublicKey[0].toString()) && 
                                publicKey[1] === BigInt(userPublicKey[1].toString());
         if (!publicKeysMatch) {
-            console.error("‚ùå Private key doesn't match registered public key - decryption will fail!");
+            console.error("‚ù?Private key doesn't match registered public key - decryption will fail!");
             console.log("üí° Run: npx hardhat run scripts/standalone/03_register-user.ts --network fuji to fix this");
             return;
         }
-        console.log("‚úÖ Private key matches registered public key");
+        console.log("‚ú?Private key matches registered public key");
         
         // Get token information
         const tokenName = await encryptedERC.name();
@@ -176,19 +176,19 @@ const main = async () => {
             console.log("  üìù No transaction history found");
         }
         
-        console.log(`\n‚úÖ Balance Check Complete!`);
+        console.log(`\n‚ú?Balance Check Complete!`);
         console.log(`üí∞ Spendable Balance: ${ethers.formatUnits(userCurrentBalance, tokenDecimals)} ${tokenSymbol}`);
         console.log(`üìã Transaction Records: ${transactionCount} audit records found`);
         
         console.log("\nüí° Balance Information:");
-        console.log(`   ‚Ä¢ Spendable balance: ${ethers.formatUnits(userCurrentBalance, tokenDecimals)} ${tokenSymbol}`);
-        console.log(`   ‚Ä¢ Balance source: ${balanceSource === "EGCT" ? "EGCT encryption" : balanceSource === "PCTs" ? "PCT transaction history" : "No balance found"}`);
-        console.log(`   ‚Ä¢ Transaction records: ${transactionCount} audit records found`);
-        console.log(`   ‚Ä¢ All data is privately encrypted - only you can decrypt it`);
-        console.log(`   ‚Ä¢ This balance can be used for transfers and burns`);
+        console.log(`   ‚Ä?Spendable balance: ${ethers.formatUnits(userCurrentBalance, tokenDecimals)} ${tokenSymbol}`);
+        console.log(`   ‚Ä?Balance source: ${balanceSource === "EGCT" ? "EGCT encryption" : balanceSource === "PCTs" ? "PCT transaction history" : "No balance found"}`);
+        console.log(`   ‚Ä?Transaction records: ${transactionCount} audit records found`);
+        console.log(`   ‚Ä?All data is privately encrypted - only you can decrypt it`);
+        console.log(`   ‚Ä?This balance can be used for transfers and burns`);
         
     } catch (error) {
-        console.error("‚ùå Error checking balance:");
+        console.error("‚ù?Error checking balance:");
         console.error(error);
         
         if (error instanceof Error) {

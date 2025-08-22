@@ -1,0 +1,243 @@
+:root {
+  --color-bg: #0b1220;
+  --color-surface: #0f172a;
+  --color-card: #111b2e;
+  --color-border: rgba(148, 163, 184, 0.15);
+  --color-text: #e5e7eb;
+  --color-text-muted: #9ca3af;
+  --color-accent: #8b5cf6;
+  --color-accent-2: #06b6d4;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(
+      1200px 800px at 10% -10%,
+      rgba(124, 58, 237, 0.15),
+      transparent 60%
+    ),
+    radial-gradient(
+      1000px 700px at 110% 10%,
+      rgba(6, 182, 212, 0.12),
+      transparent 60%
+    ),
+    var(--color-bg);
+  color: var(--color-text);
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Helvetica,
+    Arial,
+    "Apple Color Emoji",
+    "Segoe UI Emoji";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0 0 12px 0;
+}
+
+a {
+  color: var(--color-accent-2);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Layout */
+.app-shell {
+  padding: 16px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.brand {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.app-nav {
+  display: flex;
+  gap: 12px;
+  margin: 6px 0 16px 0;
+}
+
+.page {
+  padding: 0;
+}
+
+/* Surface & cards */
+.card {
+  background:
+    linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.02),
+        rgba(255, 255, 255, 0.01)
+      )
+      no-repeat,
+    var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  box-shadow: var(--shadow-lg);
+}
+
+.card-title {
+  font-weight: 700;
+}
+
+.muted {
+  color: var(--color-text-muted);
+}
+
+/* Forms */
+label {
+  color: var(--color-text-muted);
+}
+
+input,
+select,
+textarea {
+  background: var(--color-card);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  outline: none;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: rgba(124, 58, 237, 0.6);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
+}
+
+/* Buttons */
+button {
+  background: linear-gradient(
+    180deg,
+    rgba(139, 92, 246, 0.9),
+    rgba(124, 58, 237, 0.9)
+  );
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  cursor: pointer;
+  transition:
+    transform 0.1s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease;
+  box-shadow: 0 6px 16px rgba(124, 58, 237, 0.35);
+}
+
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(124, 58, 237, 0.45);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: linear-gradient(
+    180deg,
+    rgba(51, 65, 85, 0.8),
+    rgba(30, 41, 59, 0.8)
+  );
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.45);
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead th {
+  text-align: left;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  border-bottom: 1px solid var(--color-border);
+  padding: 8px 6px;
+}
+
+tbody td {
+  padding: 10px 6px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+tbody tr:hover {
+  background: rgba(148, 163, 184, 0.05);
+}
+
+/* Code blocks */
+pre {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  overflow: auto;
+}
+
+/* NFT Card */
+.nft-card {
+  width: 260px;
+}
+
+.nft-card img {
+  width: 100%;
+  border-radius: 6px;
+  margin-top: 8px;
+}
+
+.img-placeholder {
+  height: 200px;
+  background: linear-gradient(
+    135deg,
+    rgba(148, 163, 184, 0.08),
+    rgba(148, 163, 184, 0.02)
+  );
+  border-radius: 6px;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  font-size: 12px;
+  border: 1px dashed var(--color-border);
+}

@@ -15,7 +15,7 @@ const main = async () => {
     const deploymentData = JSON.parse(fs.readFileSync(deploymentPath, "utf8"));
 
     const eERCAddress = deploymentData.contracts.encryptedERC;
-    const auditorPublicKeyAddress = "0x38332d73dC01548fC6710Acbbe8116516111781A" as any;
+    const auditorPublicKeyAddress = await deployer.getAddress();
 
     const encryptedERC = await EncryptedERC__factory.connect(eERCAddress, deployer);
     let auditor: any;
@@ -31,23 +31,23 @@ const main = async () => {
          const auditorAddress = await encryptedERC.auditor();
          const auditorPublicKey = await encryptedERC.auditorPublicKey();
          
-         console.log("‚úÖ Auditor successfully configured for standalone mode");
+         console.log("‚ú?Auditor successfully configured for standalone mode");
          console.log("Auditor address:", auditorAddress);
          console.log("Auditor public key X:", auditorPublicKey.x.toString());
          console.log("Auditor public key Y:", auditorPublicKey.y.toString());
          
          console.log("\nüéØ Standalone System Ready!");
          console.log("üìã The system is now configured for private minting:");
-         console.log("   ‚Ä¢ Auditor can decrypt transaction amounts for compliance");
-         console.log("   ‚Ä¢ Owner can now mint tokens privately to registered users");
-         console.log("   ‚Ä¢ All operations will be recorded for audit purposes");
+         console.log("   ‚Ä?Auditor can decrypt transaction amounts for compliance");
+         console.log("   ‚Ä?Owner can now mint tokens privately to registered users");
+         console.log("   ‚Ä?All operations will be recorded for audit purposes");
          
          console.log("\nüöÄ Next Steps:");
-         console.log("   ‚Ä¢ Register users: npx hardhat run scripts/standalone/03_register-user.ts --network fuji");
-         console.log("   ‚Ä¢ Mint tokens: npx hardhat run scripts/standalone/05_mint.ts --network fuji");
+         console.log("   ‚Ä?Register users: npx hardhat run scripts/standalone/03_register-user.ts --network fuji");
+         console.log("   ‚Ä?Mint tokens: npx hardhat run scripts/standalone/05_mint.ts --network fuji");
          
     } catch (error) {
-        console.error("‚ùå Error setting auditor:", error);
+        console.error("‚ù?Error setting auditor:", error);
         
         // Show more error details
         if (error instanceof Error) {

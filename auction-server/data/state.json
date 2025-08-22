@@ -1,0 +1,203 @@
+{
+  "bids": [
+    {
+      "logIndex": 0,
+      "from": "0x1202D8a676fD3a876AA432dFAD52Bdc6ce5e9D35",
+      "to": "0x04b486D57BacBBE2D59CdAF2391F669b339F60F8",
+      "amount": "2",
+      "blockNumber": 45082151
+    },
+    {
+      "txHash": "0x246095369a6737162ea4573389c30dfc53c6859a918c04b59ce41d31cd13df1e",
+      "logIndex": 0,
+      "from": "0x1202D8a676fD3a876AA432dFAD52Bdc6ce5e9D35",
+      "to": "0x04b486D57BacBBE2D59CdAF2391F669b339F60F8",
+      "amount": "2",
+      "blockNumber": 45082151
+    },
+    {
+      "txHash": "0x09a4020158cc0428ce11d5bd4913c722b41e818b55c4f6c19787c1d9aae0e873",
+      "logIndex": 0,
+      "from": "0x5549ba00504cE755deD6640FD8b574a66d090FAb",
+      "to": "0x04b486D57BacBBE2D59CdAF2391F669b339F60F8",
+      "amount": "1",
+      "blockNumber": 45082164
+    },
+    {
+      "txHash": "0x9023dcd512d038452d3aaafde3cc4aea57e6573d9e66b7e30570727bf7a9834f",
+      "logIndex": 0,
+      "from": "0x5549ba00504cE755deD6640FD8b574a66d090FAb",
+      "to": "0x04b486D57BacBBE2D59CdAF2391F669b339F60F8",
+      "amount": "2",
+      "blockNumber": 45082716
+    },
+    {
+      "txHash": "0xd24beee553f51ee4fb3e553ea3464852066cc6907670d516b0d90f912de91696",
+      "logIndex": 0,
+      "from": "0x1202D8a676fD3a876AA432dFAD52Bdc6ce5e9D35",
+      "to": "0x04b486D57BacBBE2D59CdAF2391F669b339F60F8",
+      "amount": "1",
+      "blockNumber": 45082727
+    },
+    {
+      "txHash": "0xe7f67b8d0dce0ee249b34f1b56464a73619bcbd0895a8789f17eabd2ef069ff4",
+      "logIndex": 0,
+      "from": "0x1202D8a676fD3a876AA432dFAD52Bdc6ce5e9D35",
+      "to": "0x04b486D57BacBBE2D59CdAF2391F669b339F60F8",
+      "amount": "1",
+      "blockNumber": 45083089
+    },
+    {
+      "txHash": "0x7c313ee3a492945c40e569c91f16d2273b1b18a3ecf2b1413c223b9e34d98ad2",
+      "logIndex": 0,
+      "from": "0x5549ba00504cE755deD6640FD8b574a66d090FAb",
+      "to": "0x04b486D57BacBBE2D59CdAF2391F669b339F60F8",
+      "amount": "2",
+      "blockNumber": 45083099
+    },
+    {
+      "txHash": "0x36b045c27e2aaca661e5780738a177247a011464370559794f90f5b164e209fb",
+      "logIndex": 0,
+      "from": "0x5549ba00504cE755deD6640FD8b574a66d090FAb",
+      "to": "0x04b486D57BacBBE2D59CdAF2391F669b339F60F8",
+      "amount": "2",
+      "blockNumber": 45083779
+    },
+    {
+      "txHash": "0x33e0f86cb1e8a8a212589dbdf7992ec28dcaff65d2b74d85b2700f8aafe7f5f5",
+      "logIndex": 0,
+      "from": "0x1202D8a676fD3a876AA432dFAD52Bdc6ce5e9D35",
+      "to": "0x04b486D57BacBBE2D59CdAF2391F669b339F60F8",
+      "amount": "1",
+      "blockNumber": 45083792
+    },
+    {
+      "txHash": "0xd08a898bd1a36a2cbbbd2b5bfc24b93402360a6c2e2dcec896ed6d6946d76e9b",
+      "logIndex": 0,
+      "from": "0x1202D8a676fD3a876AA432dFAD52Bdc6ce5e9D35",
+      "to": "0x04b486D57BacBBE2D59CdAF2391F669b339F60F8",
+      "amount": "2",
+      "blockNumber": 45084111
+    },
+    {
+      "txHash": "0x8338266807be8f0ad277a236d1f9b5599286d1a8e4ce18c54de6039c2c93c50b",
+      "logIndex": 0,
+      "from": "0x5549ba00504cE755deD6640FD8b574a66d090FAb",
+      "to": "0x04b486D57BacBBE2D59CdAF2391F669b339F60F8",
+      "amount": "1",
+      "blockNumber": 45084121
+    },
+    {
+      "txHash": "0x83af56797e1759e2a91a147b9db608e190bba45b021f4e06218656d012432065",
+      "logIndex": 0,
+      "from": "0x1202D8a676fD3a876AA432dFAD52Bdc6ce5e9D35",
+      "to": "0x04b486D57BacBBE2D59CdAF2391F669b339F60F8",
+      "amount": "1",
+      "blockNumber": 45084166
+    },
+    {
+      "txHash": "0xa4fac298d0e4b65dc4c014495bb3fef3c36c2cf81c8cd96ba00896f9435a4fcf",
+      "logIndex": 0,
+      "from": "0x5549ba00504cE755deD6640FD8b574a66d090FAb",
+      "to": "0x04b486D57BacBBE2D59CdAF2391F669b339F60F8",
+      "amount": "2",
+      "blockNumber": 45084193
+    },
+    {
+      "txHash": "0xa76ec47d95ff1ab9fd48df569394543b618eb1f791f3ad1c2c0495ee99dbe8ea",
+      "logIndex": 0,
+      "from": "0x1202D8a676fD3a876AA432dFAD52Bdc6ce5e9D35",
+      "to": "0x04b486D57BacBBE2D59CdAF2391F669b339F60F8",
+      "amount": "1",
+      "blockNumber": 45084222
+    },
+    {
+      "txHash": "0xaf7afb697541c5e7342225fbaa1b6ce5ffece1c49ca8d3bf7e45b2d8e1d2b9ef",
+      "logIndex": 0,
+      "from": "0x5549ba00504cE755deD6640FD8b574a66d090FAb",
+      "to": "0x04b486D57BacBBE2D59CdAF2391F669b339F60F8",
+      "amount": "2",
+      "blockNumber": 45084235
+    }
+  ],
+  "auctions": {
+    "memn8sp8bsf1": {
+      "id": "memn8sp8bsf1",
+      "name": "Test Auction",
+      "status": "open",
+      "createdAt": 1755855860300
+    },
+    "memnv7x0e9kd": {
+      "id": "memnv7x0e9kd",
+      "name": "Test Auction",
+      "status": "open",
+      "createdAt": 1755856906452
+    },
+    "memo6k0jg6cj": {
+      "id": "memo6k0jg6cj",
+      "name": "Test Auction",
+      "status": "open",
+      "createdAt": 1755857435347
+    },
+    "memo6u60f6nl": {
+      "id": "memo6u60f6nl",
+      "name": "Test Auction",
+      "status": "open",
+      "createdAt": 1755857448504
+    },
+    "memp2lfh42r8": {
+      "id": "memp2lfh42r8",
+      "name": "Test Auction",
+      "status": "open",
+      "createdAt": 1755858930173
+    },
+    "mempg5gr8m4m": {
+      "id": "mempg5gr8m4m",
+      "name": "Test Auction2",
+      "status": "open",
+      "createdAt": 1755859562667
+    },
+    "mempiknc1sjl": {
+      "id": "mempiknc1sjl",
+      "name": "Test Auction",
+      "status": "open",
+      "createdAt": 1755859675656
+    },
+    "mempkslr23ce": {
+      "id": "mempkslr23ce",
+      "name": "Test Auction",
+      "status": "open",
+      "createdAt": 1755859779279
+    }
+  },
+  "auctionBidKeys": {
+    "memn8sp8bsf1": [
+      "undefined:0"
+    ],
+    "memnv7x0e9kd": [
+      "undefined:0"
+    ],
+    "memo6k0jg6cj": [],
+    "memo6u60f6nl": [
+      "undefined:0"
+    ],
+    "memp2lfh42r8": [
+      "undefined:0",
+      "0x33e0f86cb1e8a8a212589dbdf7992ec28dcaff65d2b74d85b2700f8aafe7f5f5:0"
+    ],
+    "mempg5gr8m4m": [
+      "undefined:0"
+    ],
+    "mempiknc1sjl": [
+      "0x83af56797e1759e2a91a147b9db608e190bba45b021f4e06218656d012432065:0",
+      "0xa4fac298d0e4b65dc4c014495bb3fef3c36c2cf81c8cd96ba00896f9435a4fcf:0"
+    ],
+    "mempkslr23ce": [
+      "0xa76ec47d95ff1ab9fd48df569394543b618eb1f791f3ad1c2c0495ee99dbe8ea:0",
+      "0xaf7afb697541c5e7342225fbaa1b6ce5ffece1c49ca8d3bf7e45b2d8e1d2b9ef:0"
+    ]
+  },
+  "auctionSeller": {
+    "mempkslr23ce": "0x4Fb3eC7ac3f23d8BD4bF463Ccc3911F8a02142aa"
+  }
+}
