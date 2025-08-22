@@ -23,7 +23,7 @@ const main = async () => {
   // Transfer amount - let's transfer 30 tokens (in encrypted system units)
   const transferAmount = BigInt(2 * 100); // 30 tokens with 2 decimal places
 
-  console.log("ğŸ”„ Private Transfer in Standalone EncryptedERC...");
+  console.log("Private Transfer in Standalone EncryptedERC...");
   console.log("Sender:", senderAddress);
   console.log("Receiver:", receiverAddress);
   console.log(
@@ -65,18 +65,16 @@ const main = async () => {
 
     if (!isSenderRegistered) {
       console.error(
-        "â?Sender is not registered. Please run the registration script first."
+        "Sender is not registered. Please run the registration script first."
       );
       return;
     }
     if (!isReceiverRegistered) {
-      console.error(
-        "â?Receiver is not registered. They need to register first."
-      );
+      console.error("Receiver is not registered. They need to register first.");
       return;
     }
 
-    console.log("âœ?Both sender and receiver are registered");
+    console.log("Both sender and receiver are registered");
 
     // Load or generate sender's keys
     let senderPrivateKey: bigint;
@@ -87,14 +85,14 @@ const main = async () => {
       "../../deployments/standalone/user-keys.json"
     );
     if (fs.existsSync(keysPath)) {
-      console.log("ğŸ”‘ Loading sender keys from saved file...");
+      console.log("Loading sender keys from saved file...");
       const keysData = JSON.parse(fs.readFileSync(keysPath, "utf8"));
 
       if (keysData.address === senderAddress) {
         senderPrivateKey = BigInt(keysData.privateKey.raw);
-        console.log("âœ?Sender keys loaded from file");
+        console.log("Sender keys loaded from file");
       } else {
-        console.log("âš ï¸  Saved keys mismatch, generating new signature...");
+        console.log("Saved keys mismatch, generating new signature...");
         const message = `eERC
 Registering user with
  Address:${senderAddress.toLowerCase()}`;
@@ -102,7 +100,7 @@ Registering user with
         senderPrivateKey = i0(signature);
       }
     } else {
-      console.log("ğŸ” Generating signature for sender...");
+      console.log("Generating signature for sender...");
       const message = `eERC
 Registering user with
  Address:${senderAddress.toLowerCase()}`;
@@ -118,15 +116,15 @@ Registering user with
     const receiverPublicKey = await registrar.getUserPublicKey(receiverAddress);
     const auditorPublicKey = await encryptedERC.auditorPublicKey();
 
-    console.log("ğŸ”‘ Sender public key:", [
+    console.log("Sender public key:", [
       senderPublicKey[0].toString(),
       senderPublicKey[1].toString(),
     ]);
-    console.log("ğŸ”‘ Receiver public key:", [
+    console.log("Receiver public key:", [
       receiverPublicKey[0].toString(),
       receiverPublicKey[1].toString(),
     ]);
-    console.log("ğŸ”‘ Auditor public key:", [
+    console.log("Auditor public key:", [
       auditorPublicKey.x.toString(),
       auditorPublicKey.y.toString(),
     ]);
@@ -139,20 +137,20 @@ Registering user with
 
     if (!senderKeysMatch) {
       console.error(
-        "â?Sender's private key doesn't match registered public key!"
+        "Sender's private key doesn't match registered public key!"
       );
       console.log(
         "Run: npx hardhat run scripts/standalone/03_register-user.ts --network fuji"
       );
       return;
     }
-    console.log("âœ?Sender keys verified");
+    console.log("Sender keys verified");
 
     // For standalone mode, tokenId is always 0
     const tokenId = 0n;
 
     // Get sender's current encrypted balance
-    console.log("ğŸ” Getting sender's encrypted balance...");
+    console.log("Getting sender's encrypted balance...");
     const [eGCT, nonce, amountPCTs, balancePCT, transactionIndex] =
       await encryptedERC.balanceOf(senderAddress, tokenId);
 
@@ -169,7 +167,7 @@ Registering user with
     const isEGCTEmpty =
       c1[0] === 0n && c1[1] === 0n && c2[0] === 0n && c2[1] === 0n;
     if (isEGCTEmpty) {
-      console.error("â?Sender has no encrypted balance to transfer");
+      console.error("Sender has no encrypted balance to transfer");
       return;
     }
 
@@ -177,18 +175,18 @@ Registering user with
     const tokenDecimals = await encryptedERC.decimals();
 
     console.log(
-      `ğŸ’° Sender's current balance: ${ethers.formatUnits(senderCurrentBalance, tokenDecimals)} PRIV`
+      `Sender's current balance: ${ethers.formatUnits(senderCurrentBalance, tokenDecimals)} PRIV`
     );
 
     if (senderCurrentBalance < transferAmount) {
       console.error(
-        `â?Insufficient balance. Have: ${ethers.formatUnits(senderCurrentBalance, tokenDecimals)}, Need: ${ethers.formatUnits(transferAmount, tokenDecimals)}`
+        `Insufficient balance. Have: ${ethers.formatUnits(senderCurrentBalance, tokenDecimals)}, Need: ${ethers.formatUnits(transferAmount, tokenDecimals)}`
       );
       return;
     }
 
     console.log(
-      `âœ?Transfer amount: ${ethers.formatUnits(transferAmount, tokenDecimals)} PRIV tokens`
+      `Transfer amount: ${ethers.formatUnits(transferAmount, tokenDecimals)} PRIV tokens`
     );
 
     // Prepare data for transfer proof generation
@@ -202,8 +200,8 @@ Registering user with
       BigInt(auditorPublicKey.y.toString()),
     ];
 
-    console.log("ğŸ” Generating transfer proof...");
-    console.log("â?This may take a while...");
+    console.log("Generating transfer proof...");
+    console.log("This may take a while...");
 
     // Generate transfer proof using the helper function
     const { proof, senderBalancePCT } = await privateTransfer(
@@ -215,15 +213,15 @@ Registering user with
       auditorPublicKeyArray
     );
 
-    console.log("âœ?Transfer proof generated successfully");
+    console.log("Transfer proof generated successfully");
 
     // Debug the proof structure
-    console.log("ğŸ” Debug: transfer proof structure:", proof);
+    console.log("Debug: transfer proof structure:", proof);
 
     // Use the proof directly (since privateTransfer returns the correct calldata format)
     const transferProof = proof;
 
-    console.log("ğŸ“ Submitting transfer to contract...");
+    console.log("Submitting transfer to contract...");
 
     // Call the contract's transfer function
     const transferTx = await encryptedERC.transfer(
@@ -233,18 +231,18 @@ Registering user with
       senderBalancePCT
     );
 
-    console.log("ğŸ“ Transfer transaction sent:", transferTx.hash);
+    console.log("Transfer transaction sent:", transferTx.hash);
 
     const receipt = await transferTx.wait();
     console.log(
-      "âœ?Transfer transaction confirmed in block:",
+      "Transfer transaction confirmed in block:",
       receipt?.blockNumber
     );
 
-    console.log("ğŸ‰ Private transfer completed successfully!");
+    console.log("Private transfer completed successfully!");
 
     // Show updated balances
-    console.log("\nğŸ” Checking updated balances...");
+    console.log("\nChecking updated balances...");
 
     // Get sender's new balance
     const [newEGCT] = await encryptedERC.balanceOf(senderAddress, tokenId);
@@ -259,37 +257,37 @@ Registering user with
     const senderNewBalance = decryptEGCTBalance(senderPrivateKey, newC1, newC2);
 
     console.log(
-      `ğŸ’° Sender's new balance: ${ethers.formatUnits(senderNewBalance, tokenDecimals)} PRIV`
+      `Sender's new balance: ${ethers.formatUnits(senderNewBalance, tokenDecimals)} PRIV`
     );
     console.log(
-      `ğŸ“¤ Amount transferred: ${ethers.formatUnits(transferAmount, tokenDecimals)} PRIV`
+      `Amount transferred: ${ethers.formatUnits(transferAmount, tokenDecimals)} PRIV`
     );
 
-    console.log("\nğŸ¯ Transfer Summary:");
+    console.log("\nTransfer Summary:");
     console.log(`   From: ${senderAddress}`);
     console.log(`   To: ${receiverAddress}`);
     console.log(
       `   Amount: ${ethers.formatUnits(transferAmount, tokenDecimals)} PRIV tokens`
     );
     console.log(`   Transaction: ${transferTx.hash}`);
-    console.log("\nğŸ’¡ The receiver can check their balance using:");
+    console.log("\nThe receiver can check their balance using:");
     console.log(
       "   npx hardhat run scripts/standalone/06_check-balance.ts --network fuji"
     );
   } catch (error) {
-    console.error("â?Error during private transfer:");
+    console.error("Error during private transfer:");
     console.error(error);
 
     if (error instanceof Error) {
       if (error.message.includes("User not registered")) {
-        console.error("ğŸ’¡ Hint: Both sender and receiver must be registered");
+        console.error("Hint: Both sender and receiver must be registered");
       } else if (error.message.includes("Auditor not set")) {
         console.error(
-          "ğŸ’¡ Hint: The auditor needs to be set in the EncryptedERC contract"
+          "Hint: The auditor needs to be set in the EncryptedERC contract"
         );
       } else if (error.message.includes("InvalidProof")) {
         console.error(
-          "ğŸ’¡ Hint: The transfer proof verification failed - check inputs"
+          "Hint: The transfer proof verification failed - check inputs"
         );
       }
     }
